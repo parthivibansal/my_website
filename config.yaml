@@ -69,9 +69,9 @@ params:
     links:
       - name: Home
         url: '#'
-      - name: Blogs
-        url: blogs
-      - name: Generic Blog
+      - name: WELCOME TO MY WORLD
+        url: blogs/me
+      - name: 
         url: blogs/ipsum
       - name: Elements
         url: elements.html
@@ -101,10 +101,10 @@ params:
         subtitle: Ipsum Dolor Sit Amet
         title: Consequat
         url: blogs/ipsum
-      - image: pic06.jpg
-        subtitle: Feugiat Amet Tempus
-        title: Etiam
-        url: blogs/ipsum
+      - image: Inflation.jpg
+        subtitle: Assignment
+        title: Inflation and CPI Analysis
+        url: blogs/me3
   two:
     buttonText: Get Started
     enable: yes

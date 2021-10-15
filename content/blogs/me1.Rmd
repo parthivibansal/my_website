@@ -1,0 +1,32 @@
+---
+categories:
+- ""
+- ""
+date: "2017-10-31T22:26:09-05:00"
+description:
+draft: false
+image: me.jpeg
+keywords: ""
+slug: me
+title: WELCOME TO MY WORLD
+---
+
+[*SAY HELLO!*]{.ul}
+
+Hi! I'm Parthivi Bansal from New Delhi, India! Impact driven at heart and curious by nature, I am pursuing my Masters in Financial Analysis from London Business School. I pursued my Bachelors in Finance from India!
+
+[*WHAT ARE MY QUALIFICATIONS?*]{.ul}
+
+**Degrees: Bachelors in Management (9.6/10) , Masters in Finance (8/10)**
+
+Work Experience:
+
+-Equity researcher at Maversify
+
+-Investment Managemer at Finway Capital
+
+-Investment Researcher at FinLadder
+
+[*5 WORDS THAT DEFINE ME*]{.ul}
+
+Leader, Extrovert, Empathetic, Analytical, Hardworking
