@@ -1,0 +1,338 @@
+---
+categories:
+- ""
+- ""
+date: "2017-10-31T22:26:09-05:00"
+description:
+draft: false
+image: inflation.jpeg
+keywords: ""
+slug: inflation
+title: Inflation and CPI Analysis
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>We load all the libraries:</p>
+<ol style="list-style-type: decimal">
+<li>We scrape the FRED website and pull all of the CPI components into a vector</li>
+</ol>
+<pre class="r"><code>library(rvest)
+url &lt;- &quot;https://fredaccount.stlouisfed.org/public/datalist/843&quot;
+
+tables &lt;- url %&gt;% 
+  read_html() %&gt;% 
+  html_nodes(css=&quot;table&quot;)
+
+cpi &lt;- map(tables, . %&gt;% 
+             html_table(fill=TRUE)%&gt;% 
+             janitor::clean_names()) 
+
+cpi_id = cpi[[2]]$series_id</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Once we have a vector of components, you can then pass it to <code>tidyquant::tq_get(get = "economic.data", from =  "2000-01-01")</code> to get all data since January 1, 2000</li>
+</ol>
+<pre class="r"><code>cpi_data &lt;- tidyquant::tq_get(cpi_id, get = &quot;economic.data&quot;, from =  &quot;2000-01-01&quot;)</code></pre>
+<pre><code>## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;
+
+## Warning: `type_convert()` only converts columns of type &#39;character&#39;.
+## - `df` has no columns of type &#39;character&#39;</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Since the data you download is an index with various starting dates, we need to calculate the yearly, or 12-month change. To do this we need to use the <code>lag</code> function, and specifically, <code>year_change = value/lag(value, 12) - 1</code>; this means that we are comparing the current month’s value with that 12 months ago lag(value, 12).</li>
+</ol>
+<pre class="r"><code>cpi_data_clean &lt;- cpi_data %&gt;% pivot_wider(id_cols=1:3, 
+               names_from=&quot;symbol&quot;, 
+               values_from = &quot;price&quot;)
+
+#Make date the index to make mutate_all work
+cpi_data_clean1 &lt;- cpi_data_clean %&gt;% 
+     remove_rownames() %&gt;%
+     column_to_rownames(var = &#39;date&#39;)
+
+#Define Function
+Funk &lt;- function(x, na.rm = FALSE) (x/lag(x, 12) - 1)
+
+#Apply functions to all columns into new dataset
+cpi_changes &lt;- cpi_data_clean1 %&gt;%  mutate_all(
+  Funk
+)</code></pre>
+<p>Below we format the graph</p>
+<ol start="4" style="list-style-type: decimal">
+<li>We order components so the higher the yearly change, the earlier does that component appear.</li>
+<li>We also make sure that the <strong>All Items</strong> CPI (CPIAUCSL) appears first.</li>
+<li>We then add a <code>geom_smooth()</code> for each component to get a sense of the overall trend.
+7 Finally, we colour the points according to whether yearly change was positive or negative.</li>
+</ol>
+<pre class="r"><code># Make date back as first column for pivot_longer
+cpi_changes &lt;- cbind(&quot;Date&quot; = rownames(cpi_changes), cpi_changes)
+
+cpi_changes_graph &lt;- cpi_changes %&gt;% 
+  pivot_longer(cols=2:50, 
+               names_to=&quot;Component&quot;, 
+               values_to = &quot;YoY&quot;)
+
+cpi_changes_graph &lt;- cpi_changes_graph %&gt;% mutate(
+  Neg = (YoY&lt;=0)
+)
+
+cpi_changes_graph$Date &lt;- as.Date(cpi_changes_graph$Date, &quot;%Y-%m-%d&quot;)
+
+# Get our order of components by max descending (excl. All Items)
+cpi_order &lt;- cpi_changes_graph %&gt;%
+  filter(Date&gt;=&quot;2016-01-01&quot;) %&gt;%
+  filter(Component != &quot;CPIAUCSL&quot;) %&gt;% 
+  group_by(Component) %&gt;% 
+  summarise(max_YoY = max(YoY,na.rm=TRUE)) %&gt;% 
+  arrange(-max_YoY)
+
+# Put the all items at the start (append)
+order = c(cpi_order$Component)
+order = append(&quot;CPIAUCSL&quot;, order)
+order</code></pre>
+<pre><code>##  [1] &quot;CPIAUCSL&quot;       &quot;CUSR0000SETB01&quot; &quot;CUSR0000SETB&quot;   &quot;CUSR0000SETA02&quot;
+##  [5] &quot;CUSR0000SEHE&quot;   &quot;CUSR0000SETG01&quot; &quot;CUSR0000SAT1&quot;   &quot;CUSR0000SEHB&quot;  
+##  [9] &quot;CPITRNSL&quot;       &quot;CUSR0000SEHF02&quot; &quot;CUSR0000SETA&quot;   &quot;CUSR0000SETG&quot;  
+## [13] &quot;CUSR0000SAF112&quot; &quot;CUSR0000SAH21&quot;  &quot;CUSR0000SEAF&quot;   &quot;CUSR0000SETA01&quot;
+## [17] &quot;CUSR0000SEHF&quot;   &quot;CUSR0000SAH2&quot;   &quot;CUSR0000SEAE&quot;   &quot;CUSR0000SEFS&quot;  
+## [21] &quot;CUSR0000SETC&quot;   &quot;CUSR0000SEFJ&quot;   &quot;CPIAPPSL&quot;       &quot;CUSR0000SAF11&quot; 
+## [25] &quot;CUSR0000SAA2&quot;   &quot;CUSR0000SEHF01&quot; &quot;CUSR0000SAF114&quot; &quot;CUSR0000SAH3&quot;  
+## [29] &quot;CUSR0000SEFR&quot;   &quot;CUSR0000SEFV05&quot; &quot;CUSR0000SEFV&quot;   &quot;CPIUFDSL&quot;      
+## [33] &quot;CUSR0000SEFT&quot;   &quot;CPIFABSL&quot;       &quot;CUSR0000SEHG&quot;   &quot;CUSR0000SAA1&quot;  
+## [37] &quot;CUSR0000SETD&quot;   &quot;CUSR0000SAF115&quot; &quot;CUSR0000SEHA&quot;   &quot;CUSR0000SEFP01&quot;
+## [41] &quot;CUSR0000SAF113&quot; &quot;CPIHOSSL&quot;       &quot;CUSR0000SAH1&quot;   &quot;CUSR0000SEHC01&quot;
+## [45] &quot;CUSR0000SEHC&quot;   &quot;CUSR0000SEFX&quot;   &quot;CUSR0000SAF111&quot; &quot;CUSR0000SAF116&quot;
+## [49] &quot;CUSR0000SEFW&quot;</code></pre>
+<pre class="r"><code>cpi_changes_graph %&gt;%
+  filter(Date&gt;=&quot;2016-01-01&quot;) %&gt;% 
+  group_by(Component) %&gt;% 
+  mutate(
+    max_cpi = max(YoY)
+  )</code></pre>
+<pre><code>## # A tibble: 3,381 × 5
+## # Groups:   Component [49]
+##    Date       Component           YoY Neg   max_cpi
+##    &lt;date&gt;     &lt;chr&gt;             &lt;dbl&gt; &lt;lgl&gt;   &lt;dbl&gt;
+##  1 2016-01-01 CUSR0000SETG01 -0.0192  TRUE   0.246 
+##  2 2016-01-01 CUSR0000SEFW    0.0102  FALSE  0.0289
+##  3 2016-01-01 CUSR0000SEFX    0.0156  FALSE  0.0336
+##  4 2016-01-01 CUSR0000SAF116  0.0120  FALSE  0.0298
+##  5 2016-01-01 CPIAUCSL        0.0124  FALSE  0.0538
+##  6 2016-01-01 CPIAPPSL       -0.00896 TRUE   0.0557
+##  7 2016-01-01 CUSR0000SAF111  0.00355 FALSE  0.0329
+##  8 2016-01-01 CUSR0000SEFP01 -0.0262  TRUE   0.0395
+##  9 2016-01-01 CUSR0000SEFJ   -0.0297  TRUE   0.0568
+## 10 2016-01-01 CUSR0000SEHF01 -0.0231  TRUE   0.0524
+## # … with 3,371 more rows</code></pre>
+<pre class="r"><code># Graph
+cpi_changes_graph %&gt;%
+  filter(Date&gt;=&quot;2016-01-01&quot;) %&gt;% 
+  ggplot(aes(Date, YoY)) + 
+  geom_point(size=1, aes(colour = Neg)) +
+  geom_smooth(se=F, colour=&quot;grey&quot;) +
+  facet_wrap(~factor(Component, levels = order),scales=&quot;free&quot;)+
+  scale_y_continuous(labels = scales::percent)+
+  scale_x_date(breaks = as.Date(c(&quot;2016-01-01&quot;, &quot;2018-01-01&quot;,&quot;2020-01-01&quot;)), labels=c(&quot;2016&quot;, &quot;2018&quot;, &quot;2020&quot;),
+               minor_breaks = as.Date(c(&quot;2016-01-01&quot;, &quot;2018-01-01&quot;,
+                                        &quot;2020-01-01&quot;)))+
+  theme_bw()+
+  theme(legend.title = element_blank(),legend.position = &quot;none&quot;,
+        axis.text.x = element_text(size=5, colour = &quot;black&quot;), 
+    axis.text.y = element_text(size=5, colour = &quot;black&quot;),
+    plot.title = element_text(size=14, face= &quot;bold&quot;, colour= &quot;black&quot;),
+    plot.subtitle = element_text(size=10, colour= &quot;black&quot;),
+    axis.title.x = element_text(size=10, colour = &quot;black&quot;),    
+    axis.title.y = element_text(size=10, colour = &quot;black&quot;))+
+  
+  labs(title=&quot;Yearly change of US CPI (All Items) and its components&quot;, 
+       subtitle = &quot;Year on year change being positive or negative
+Jan 2016 to Aug 2021&quot;, 
+       x=&quot;Year&quot;, 
+       y=&quot;YoY % Change&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/blogs/inflation_files/figure-html/format%20the%20graph-1.png" width="1440" /></p>
+<!-- As you can see, we get a similar graph to the target figure below, with identical layout of the facetted graphs. Note that the individual graph headings below were not available in the dataset scraped from FRED, so we used the component IDs instead.  -->
+<!-- ```{r cpi_all_components_since_2016, echo=FALSE, out.width="100%"} -->
+<!-- knitr::include_graphics(here::here("images", "cpi_components_since_2016.png")) -->
+<!-- ``` -->
+<p>We now graph the major categories (Housing, Transportation, Food and beverages, Medical care, Education and communication, Recreation, and Apparel), sorted according to their relative importance.</p>
+<pre class="r"><code># Get the codes/series ids for the relevant names
+# &quot;Consumer Price Index for All Urban Consumers: Housing in U.S. City Average&quot;             # 42.385, CPIHOSSL
+# &quot;Consumer Price Index for All Urban Consumers: Transportation in U.S. City Average&quot;      # 15.160, CPITRNSL
+# &quot;Consumer Price Index for All Urban Consumers: Food and Beverages in U.S. City Average&quot;  # 15.157, CPIFABSL
+# &quot;Consumer Price Index for All Urban Consumers: Apparel in U.S. City Average&quot;             # 2.663,  CPIAPPSL
+# No education, communication, and recreation info in dataset
+
+important_components = c(&quot;CPIAUCSL&quot;, &quot;CPIHOSSL&quot;, &quot;CPITRNSL&quot;, &quot;CPIFABSL&quot;, &quot;CPIAPPSL&quot;) # Included overall figure also
+
+# Graph
+cpi_changes_graph %&gt;%
+  filter(Date&gt;=&quot;2016-01-01&quot;) %&gt;% 
+  filter(Component==important_components) %&gt;% 
+  ggplot(aes(Date, YoY)) + 
+  geom_point(size=2, aes(colour = Neg)) +
+  geom_smooth(se=F, colour=&quot;grey&quot;) +
+  facet_wrap(~factor(Component, levels = important_components),scales=&quot;free&quot;, ncol=1)+
+  scale_y_continuous(labels = scales::percent)+
+  scale_x_date(breaks = as.Date(c(&quot;2016-01-01&quot;, &quot;2018-01-01&quot;,&quot;2020-01-01&quot;)), labels=c(&quot;2016&quot;, &quot;2018&quot;, &quot;2020&quot;),
+               minor_breaks = as.Date(c(&quot;2016-01-01&quot;, &quot;2018-01-01&quot;,
+                                        &quot;2020-01-01&quot;)))+
+  theme_bw()+
+  theme(legend.title = element_blank(),legend.position = &quot;none&quot;,
+        axis.text.x = element_text(size=5, colour = &quot;black&quot;), 
+    axis.text.y = element_text(size=5, colour = &quot;black&quot;),
+    plot.title = element_text(size=14, face= &quot;bold&quot;, colour= &quot;black&quot;),
+    plot.subtitle = element_text(size=10, colour= &quot;black&quot;),
+    axis.title.x = element_text(size=10, colour = &quot;black&quot;),    
+    axis.title.y = element_text(size=10, colour = &quot;black&quot;))+
+  
+  labs(title=&quot;Yearly change of US CPI and selected components of US CPI&quot;, 
+       subtitle = &quot;Year on year change being positive or negative Jan 2016 to Aug 2021. Ranked in order of relative importantce&quot;, 
+       x=&quot;Year&quot;, 
+       y=&quot;YoY % Change&quot;)</code></pre>
+<pre><code>## Warning in Component == important_components: longer object length is not a
+## multiple of shorter object length</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/blogs/inflation_files/figure-html/plot%20yearly%20change%20in%20CPI%20using%20major%20categories-1.png" width="1152" /></p>

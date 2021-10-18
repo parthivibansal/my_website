@@ -98,9 +98,9 @@ params:
         title: Ipsum
         url: blogs/ipsum
       - image: pic05.jpg
-        subtitle: Ipsum Dolor Sit Amet
-        title: Consequat
-        url: blogs/ipsum
+        #subtitle: 
+        title: Beer, Wine or Spirits? What do u like?
+        url: blogs/
       - image: inflation.jpg
         subtitle: Assignment
         title: Inflation and CPI Analysis

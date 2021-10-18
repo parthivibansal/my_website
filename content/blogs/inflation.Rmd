@@ -30,7 +30,9 @@ library(fivethirtyeight)
 library(ggrepel)
 ```
 
-1. We scrape the FRED website and pull all of the CPI components into a vector.
+1. We scrape the FRED website and pull all of the CPI components into a vector
+
+
 ```{r, scape CPI data}
 library(rvest)
 url <- "https://fredaccount.stlouisfed.org/public/datalist/843"
@@ -146,10 +148,10 @@ Jan 2016 to Aug 2021",
                      
 ```
 
-As you can see, we get a similar graph to the target figure below, with identical layout of the facetted graphs. Note that the individual graph headings below were not available in the dataset scraped from FRED, so we used the component IDs instead. 
-```{r cpi_all_components_since_2016, echo=FALSE, out.width="100%"}
-knitr::include_graphics(here::here("images", "cpi_components_since_2016.png"))
-```
+<!-- As you can see, we get a similar graph to the target figure below, with identical layout of the facetted graphs. Note that the individual graph headings below were not available in the dataset scraped from FRED, so we used the component IDs instead.  -->
+<!-- ```{r cpi_all_components_since_2016, echo=FALSE, out.width="100%"} -->
+<!-- knitr::include_graphics(here::here("images", "cpi_components_since_2016.png")) -->
+<!-- ``` -->
 
 We now graph the major categories (Housing, Transportation, Food and beverages, Medical care, Education and communication, Recreation, and Apparel), sorted according to their relative importance.
 ```{r, plot yearly change in CPI using major categories, fig.width=12, fig.height=12}
