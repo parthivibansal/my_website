@@ -7,8 +7,9 @@ disqusShortname: ''
 params:
   banner:
     buttonText: Get Started
-    subtitle: Hey!
-    title: Hi, my name is Parthivi
+    subtitle: Hey! This is a small exhibit of my coding and analytical work! 
+    Hope the visualisations surprise you!
+    title: Hi Welcome to Parthivi's Portfolio!
   blog: {}
   contact:
     address:
