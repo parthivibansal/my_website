@@ -7,9 +7,7 @@ disqusShortname: ''
 params:
   banner:
     buttonText: Get Started
-    subtitle: |-
-    THIS IS AN EXHIBIT OF SOME OF THE FUN CODING ASSIGNMENTS AND VISUALISATION THAT I DID!
-    HOPE THE DATA SURPRISES AND TEACHES YOU!
+    subtitle: Hey!
     title: Hi, my name is Parthivi
   blog: {}
   contact:
