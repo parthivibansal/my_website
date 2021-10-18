@@ -7,8 +7,8 @@ description:
 draft: false
 image: inflation.jpeg
 keywords: ""
-slug: Lets see what is infuencing youth behaviour!
-title: youth
+slug: youth
+title: Lets see what is influencing the youth?
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -303,7 +303,7 @@ glimpse(yrbss)</code></pre>
 <pre><code>## [1] 16.9</code></pre>
 <pre class="r"><code>ggplot(yrbss, aes(x=weight))+
   geom_histogram()</code></pre>
-<p><img src="/blogs/youth_files/figure-html/eda_on_weight-1.png" width="648" style="display: block; margin: auto;" />
+<p><img src="/youth1_files/figure-html/eda_on_weight-1.png" width="648" style="display: block; margin: auto;" />
 We have 1004 missing values for weight. The median smaller than mean and the standard deviation is 16.89821. According to the histogram, the distribution of weight is right skewed.</p>
 <p>Then, we plot the data to visualize trends and consider the possible relationship between a high schooler’s weight and their physical activity.</p>
 <pre class="r"><code>yrbss %&gt;%
@@ -311,7 +311,7 @@ We have 1004 missing values for weight. The median smaller than mean and the sta
   ggplot(aes(x=factor(physically_active_7d)))+
   geom_boxplot(aes(y=weight))+
   labs(title=&quot;Distribution of Weight by Number of Active days in a week&quot;)</code></pre>
-<p><img src="/blogs/youth_files/figure-html/plot%20the%20relationship%20btw%20weight%20and%20physical%20activity-1.png" width="648" style="display: block; margin: auto;" />
+<p><img src="/youth1_files/figure-html/plot%20the%20relationship%20btw%20weight%20and%20physical%20activity-1.png" width="648" style="display: block; margin: auto;" />
 Additionally, we create a new variable in the dataframe <code>yrbss</code>, called <code>physical_3plus</code> , which will be <code>yes</code> if they are physically active for at least 3 days a week, and <code>no</code> otherwise. We also calculate the number and % of those who are and are not active for more than 3 days using the <code>count()</code> function.</p>
 <pre class="r"><code>yrbss_physical_3plus &lt;- yrbss %&gt;%
   filter(!is.na(physically_active_7d)) %&gt;%
@@ -385,7 +385,7 @@ prop_physical</code></pre>
   ggplot(aes(x=physical_3plus))+
   geom_boxplot(aes(y=weight))+
   labs(title=&quot;Distribution of Weight by Number of Active days in a week&quot;)</code></pre>
-<p><img src="/blogs/youth_files/figure-html/boxplot-1.png" width="648" style="display: block; margin: auto;" />
+<p><img src="/youth1_files/figure-html/boxplot-1.png" width="648" style="display: block; margin: auto;" />
 Asthe bloxplot show, median weight of people who are active for at least 3 days a week is greater than the rest, which is an unexpected result.</p>
 </div>
 </div>

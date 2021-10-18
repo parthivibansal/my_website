@@ -80,7 +80,7 @@ params:
     enable: yes
     showcase:
       - image: pic01.jpg
-        subtitle: Ipsum Dolor Sit Amet
+        #subtitle: Ipsum Dolor Sit Amet
         title: Lets see what is influencing the youth?
         url: blogs/youth
       - image: pic02.jpg

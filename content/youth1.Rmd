@@ -7,8 +7,8 @@ description:
 draft: false
 image: inflation.jpeg
 keywords: ""
-slug: Lets see what is infuencing youth behaviour!
-title: youth
+slug: youth
+title: Lets see what is influencing the youth?
 ---
 
 ```{r, setup, echo=FALSE}
