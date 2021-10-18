@@ -84,7 +84,7 @@ params:
       - image: pic01.jpg
         subtitle: Ipsum Dolor Sit Amet
         title: Aliquam
-        url: blogs/aliquam
+        url: blogs/me
       - image: pic02.jpg
         subtitle: Feugiat Amet Tempus
         title: Tempus
@@ -99,9 +99,9 @@ params:
         url: blogs/ipsum
       - image: pic05.jpg
         #subtitle: 
-        title: Beer, Wine or Spirits? What do u like?
-        url: blogs/
-      - image: inflation.jpg
+        title: Yield Curve Visualisations!
+        url: blogs/yieldcurve
+      - image: yieldcurve.jpeg
         subtitle: Assignment
         title: Inflation and CPI Analysis
         url: blogs/inflation
