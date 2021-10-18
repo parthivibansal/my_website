@@ -8,8 +8,8 @@ params:
   banner:
     buttonText: Get Started
     subtitle: |-
-      A RESPONSIVE SITE TEMPLATE DESIGNED BY HTML5 UP
-      AND RELEASED UNDER THE CREATIVE COMMONS.
+    THIS IS AN EXHIBIT OF SOME OF THE FUN CODING ASSIGNMENTS AND VISUALISATION THAT I DID!
+    HOPE THE DATA SURPRISES AND TEACHES YOU!
     title: Hi, my name is Parthivi
   blog: {}
   contact:
@@ -48,15 +48,15 @@ params:
       - icon: fa-facebook
         label: Facebook
         url: https://www.facebook.com
-      - icon: fa-instagram
-        label: Instagram
-        url: https://www.instagram.com
-      - icon: fa-github
-        label: GitHub
-        url: https://www.github.com
+      #icon: fa-instagram
+        #label: Instagram
+       # url: https://www.instagram.com
+       # icon: fa-github
+       # label: GitHub
+       # url: https://github.com/parthivibansal/
       - icon: fa-linkedin
         label: LinkedIn
-        url: https://www.linkedin.com
+        url: https://www.linkedin.com/in/parthivibansal/
   image: ''
   name: Your name
   navigation:
@@ -83,8 +83,8 @@ params:
     showcase:
       - image: pic01.jpg
         subtitle: Ipsum Dolor Sit Amet
-        title: Aliquam
-        url: blogs/me
+        title: Lets see what is influencing the youth?
+        url: blogs/youth
       - image: pic02.jpg
         subtitle: Feugiat Amet Tempus
         title: Tempus
@@ -102,7 +102,7 @@ params:
         title: Yield Curve Visualisations!
         url: blogs/yieldcurve
       - image: yieldcurve.jpeg
-        subtitle: Assignment
+        #subtitle: Assignment
         title: Inflation and CPI Analysis
         url: blogs/inflation
   two:
