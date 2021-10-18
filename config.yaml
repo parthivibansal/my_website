@@ -101,7 +101,7 @@ params:
         subtitle: Ipsum Dolor Sit Amet
         title: Consequat
         url: blogs/ipsum
-      - image: Inflation.jpg
+      - image: inflation.jpg
         subtitle: Assignment
         title: Inflation and CPI Analysis
         url: blogs/inflation
