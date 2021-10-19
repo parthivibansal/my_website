@@ -7,9 +7,8 @@ disqusShortname: ''
 params:
   banner:
     buttonText: Get Started
-    subtitle: Hey! This is a small exhibit of my coding and analytical work! 
-    Hope the visualisations surprise you!
-    title: Hi Welcome to Parthivi's Portfolio!
+    subtitle: This is a small exhibit of my coding and analytical work! 
+    title: Hi, Welcome to Parthivi's Portfolio!
   blog: {}
   contact:
     address:
@@ -71,11 +70,11 @@ params:
   tiles:
     enable: yes
     showcase:
-      - image: pic01.jpg
+      - image: youth.jpg
         #subtitle: Ipsum Dolor Sit Amet
         title: Lets see what is influencing the youth?
         url: blogs/youth
-      - image: pic02.jpg
+      - image: bike.jpg
         #subtitle: Feugiat Amet Tempus
         title: Excess rentals in TfL bike sharing!
         url: blogs/bike
@@ -83,15 +82,15 @@ params:
         #subtitle: Lorem Etiam Nullam
         #title: Magna
         #url: blogs/magna
-      - image: pic04.jpg
-        subtitle: Nisl Sed Aliquam
-        title: Ipsum
-        url: blogs/ipsum
-      - image: pic05.jpg
+      - image: stocks.jpg
+        #subtitle: Nisl Sed Aliquam
+        title: Analysis of financial returns of DJIA
+        url: blogs/stock
+      - image: yieldcurve.jpg
         #subtitle: 
-        title: Yield Curve Visualisations!
+        title: Yield Curve Visualisssations!
         url: blogs/yieldcurve
-      - image: yieldcurve.jpeg
+      - image: inflation.jpg
         #subtitle: Assignment
         title: Inflation and CPI Analysis
         url: blogs/inflation
@@ -104,5 +103,5 @@ params:
       pellentesque lorem ipsum dolor. \n    Nullam et orci eu lorem consequat tincidunt.
       Vivamus et sagittis libero.\n    Mauris aliquet magna magna sed nunc rhoncus
       amet pharetra et feugiat tempus."
-    title: Massa libero
+    title: My Hobbies
     url: blogs
