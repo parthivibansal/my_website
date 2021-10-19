@@ -3,7 +3,7 @@ title: "Yield Curve Visualisations!"
 date: '2017-10-31T22:26:09-05:00'
 description: null
 draft: no
-image: yieldcurve.jpeg
+image: yieldcurve.jpg
 keywords: ''
 slug: yieldcurve
 categories:
@@ -14,10 +14,10 @@ categories:
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p>Yield Curve inversion</p>
-<p>Every so often, we hear warnings from commentators on the “inverted yield curve” and its predictive power with respect to recessions. An explainer what a <a href="https://www.reuters.com/article/us-usa-economy-yieldcurve-explainer/explainer-what-is-an-inverted-yield-curve-idUSKBN1O50GA">inverted yield curve is can be found here</a>. If you’d rather listen to something, here is a great podcast from <a href="https://www.podbean.com/media/share/dir-4zgj9-6aefd11">NPR on yield curve indicators</a></p>
-<p>In our case we will look at US data and use the <a href="https://fred.stlouisfed.org/">FRED database</a> to download historical yield curve rates, and plot the yield curves since 1999 to see when the yield curves flatten. There’s further information from an article that explains the <a href="https://fredblog.stlouisfed.org/2018/10/the-data-behind-the-fear-of-yield-curve-inversions/">yield curve is and its inversion can be found here</a>.</p>
-<p>First, we will load the yield curve data file that contains data on the yield curve since 1960-01-01</p>
+<p>#Yield Curve inversion</p>
+<p>#INTRODUCTION : Every so often, we hear warnings from commentators on the “inverted yield curve” and its predictive power with respect to recessions.</p>
+<p>#In our case I look at US data and use the <a href="https://fred.stlouisfed.org/">FRED database</a> to download historical yield curve rates, and plot the yield curves since 1999 to see when the yield curves flatten.</p>
+<p>#First, we will load the yield curve data file that contains data on the yield curve since 1960-01-01</p>
 <pre class="r"><code>yield_curve &lt;- read_csv(here::here(&quot;data&quot;, &quot;yield_curve.csv&quot;))
 glimpse(yield_curve)</code></pre>
 <pre><code>## Rows: 6,884
@@ -98,5 +98,6 @@ yield_curve %&gt;%
        caption= &quot;Source: St. Louis Federal Reserve Economic Database (FRED)&quot;,
        x=&quot;Maturity&quot;,y=&quot;Yield(%)&quot;) </code></pre>
 <p><img src="/blogs/yieldcurve_files/figure-html/yield_curve_2:%20Monthly%20yields%20on%20US%20rates%20by%20duration%20since%201999%20on%20a%20year-by-year%20basis-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>ANALYSIS: Yield on securities have been decreasing and an inverted yield curve signals a recession.</p>
 </div>
 </div>

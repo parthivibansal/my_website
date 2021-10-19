@@ -45,7 +45,7 @@ library(openintro)
 
 # Youth Risk Behavior Surveillance
 
-INTORDUCTION: Every two years, the Centers for Disease Control and Prevention conduct the [Youth Risk Behavior Surveillance System (YRBSS)](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm) survey, where it takes data from high schoolers (9th through 12th grade), to analyze health patterns. We worked with a selected group of variables from a random sample of observations during one of the years the YRBSS was conducted.We aim to analyse the factors that influence youth behaviour the most. 
+#INTORDUCTION: Every two years, the Centers for Disease Control and Prevention conduct the [Youth Risk Behavior Surveillance System (YRBSS)](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm) survey, where it takes data from high schoolers (9th through 12th grade), to analyze health patterns. We worked with a selected group of variables from a random sample of observations during one of the years the YRBSS was conducted.We aim to analyse the factors that influence youth behaviour the most. 
 
 ## Load the data
 

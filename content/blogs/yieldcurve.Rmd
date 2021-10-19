@@ -45,13 +45,14 @@ library(infer)
 library(openintro)
 ```
 
-Yield Curve inversion
+#Yield Curve inversion
 
-INTRODUCTION : Every so often, we hear warnings from commentators on the "inverted yield curve" and its predictive power with respect to recessions. 
+#INTRODUCTION : Every so often, we hear warnings from commentators on the "inverted yield curve" and its predictive power with respect to recessions. 
 
-In our case I  look at US data and use the [FRED database](https://fred.stlouisfed.org/) to download historical yield curve rates, and plot the yield curves since 1999 to see when the yield curves flatten. 
+#In our case I  look at US data and use the [FRED database](https://fred.stlouisfed.org/) to download historical yield curve rates, and plot the yield curves since 1999 to see when the yield curves flatten. 
 
-First, we will load the yield curve data file that contains data on the yield curve since 1960-01-01
+#First, we will load the yield curve data file that contains data on the yield curve since 1960-01-01
+
 ```{r download_historical_yield_curve, warning=FALSE}
 yield_curve <- read_csv(here::here("data", "yield_curve.csv"))
 glimpse(yield_curve)

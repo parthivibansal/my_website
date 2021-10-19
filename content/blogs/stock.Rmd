@@ -48,9 +48,8 @@ library(ggrepel)
 
 # Returns of financial stocks
 
-INTRODUCTION: We are analysing the returns on 30 DJIA stocks and plotting them on a n efficient frontier(risk vs return graph) so as to make the best portfolio decisions. 
-
-We first load this code to get the data 
+#INTRODUCTION: We are analysing the returns on 30 DJIA stocks and plotting them on a n efficient frontier(risk vs return graph) so as to make the best portfolio decisions. 
+#We first load this code to get the data 
 
 ```{r, tickers_from_wikipedia}
 

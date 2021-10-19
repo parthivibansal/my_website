@@ -5,7 +5,7 @@ categories:
 date: "2017-10-31T22:26:09-05:00"
 description:
 draft: false
-image: inflation.jpeg
+image: stocks.jpg
 keywords: ""
 slug: stock
 title: Analysing financial returns of DJIA
@@ -16,6 +16,8 @@ title: Analysing financial returns of DJIA
 
 <div id="returns-of-financial-stocks" class="section level1">
 <h1>Returns of financial stocks</h1>
+<p>#INTRODUCTION: We are analysing the returns on 30 DJIA stocks and plotting them on a n efficient frontier(risk vs return graph) so as to make the best portfolio decisions.
+#We first load this code to get the data</p>
 <pre class="r"><code>djia_url &lt;- &quot;https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average&quot;
 
 
@@ -159,10 +161,6 @@ monthly_stock_performance</code></pre>
 
 density_plot</code></pre>
 <p><img src="/blogs/stock_files/figure-html/density_monthly_returns-1.png" width="648" style="display: block; margin: auto;" /></p>
-<p>What can you infer from this plot? Which stock is the riskiest? The least risky?</p>
-<blockquote>
-<p>TYPE YOUR ANSWER AFTER (AND OUTSIDE!) THIS BLOCKQUOTE.</p>
-</blockquote>
 <p>The spread of the curves corresponds to the volatility of the monthly returns. The higher the spread, thee higher the volatility of the monthly returns implying a greater risk for an investment. For example, companies like JNJ or SPY seems to have a small spread relative to other stocks. These stocks can be described as the least risky. Stocks like AAPL and DOW have the largest spread and therefore are considered as the riskist.</p>
 <p>The peak of the curve correspond to the potential return on investment , the higher the peak (which corresponds to the mean of the distribution, assuming that is normal), the higher the returns on these stocks. Companies like PG and SPY seems to have the highest potential.</p>
 <p>Finally, make a plot that shows the expected monthly return (mean) of a stock on the Y axis and the risk (standard deviation) in the X-axis. Please use <code>ggrepel::geom_text_repel()</code> to label each stock</p>
@@ -181,9 +179,5 @@ density_plot</code></pre>
 
 mean_vs_sd_plot</code></pre>
 <p><img src="/blogs/stock_files/figure-html/risk_return_plot-1.png" width="648" style="display: block; margin: auto;" /></p>
-<p>What can you infer from this plot? Are there any stocks which, while being riskier, do not have a higher expected return?</p>
-<blockquote>
-<p>TYPE YOUR ANSWER AFTER (AND OUTSIDE!) THIS BLOCKQUOTE.</p>
-</blockquote>
-<p>This plot allows us to understand better which stocks with a given level of risk, give a higher return. For example, IBM and V(VISA) have a similar risk level but V(VISA) offers a much higher return. CSCO for example has an approximate standard deviation of 0.097 and the same return of SPY which has a much lower risk. Therefore, this graph helps us making the best risk return combinations in terms of portfolio management.</p>
+<p>ANALYSIS: This plot allows us to understand better which stocks with a given level of risk, give a higher return. For example, IBM and V(VISA) have a similar risk level but V(VISA) offers a much higher return. CSCO for example has an approximate standard deviation of 0.097 and the same return of SPY which has a much lower risk. Therefore, this graph helps us making the best risk return combinations in terms of portfolio management.</p>
 </div>
