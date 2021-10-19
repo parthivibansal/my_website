@@ -97,8 +97,8 @@ params:
   two:
     buttonText: Get Started
     enable: yes
-    subtitle: " The visualisations on this page show analysis of huge chunks of data through
+    subtitle: "The visualisations on this page show analysis of huge chunks of data through
       \n   boxplots, line plots and other graphs. They majorly focus on Exploratory data analysis
-      and Inferential Statistics."
+      and Inferential Statistics"
     title: About my work
     url: blogs
