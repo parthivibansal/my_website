@@ -12,6 +12,7 @@ categories:
 ---
 
 
+
 ```{r, setup, echo=FALSE}
 knitr::opts_chunk$set(
   message = FALSE, 
@@ -46,10 +47,9 @@ library(openintro)
 
 Yield Curve inversion
 
-Every so often, we hear warnings from commentators on the "inverted yield curve" and its predictive power with respect to recessions. An explainer what a [inverted yield curve is can be found here](https://www.reuters.com/article/us-usa-economy-yieldcurve-explainer/explainer-what-is-an-inverted-yield-curve-idUSKBN1O50GA). If you'd rather listen to something, here is a great podcast from [NPR on yield curve indicators](https://www.podbean.com/media/share/dir-4zgj9-6aefd11)
+INTRODUCTION : Every so often, we hear warnings from commentators on the "inverted yield curve" and its predictive power with respect to recessions. 
 
-
-In our case we will look at US data and use the [FRED database](https://fred.stlouisfed.org/) to download historical yield curve rates, and plot the yield curves since 1999 to see when the yield curves flatten. There's further information from an article that explains the [yield curve is and its inversion can be found here](https://fredblog.stlouisfed.org/2018/10/the-data-behind-the-fear-of-yield-curve-inversions/). 
+In our case I  look at US data and use the [FRED database](https://fred.stlouisfed.org/) to download historical yield curve rates, and plot the yield curves since 1999 to see when the yield curves flatten. 
 
 First, we will load the yield curve data file that contains data on the yield curve since 1960-01-01
 ```{r download_historical_yield_curve, warning=FALSE}
@@ -135,3 +135,4 @@ yield_curve %>%
 
 ```
 
+ANALYSIS: Yield on securities have been decreasing and an inverted yield curve signals a recession. 

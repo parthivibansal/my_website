@@ -39,7 +39,7 @@ library(rsample)
 
 # Introduction 
 
-This exercise makes an interesting geographic map of the airbnb in Vienna!
+This exercise makes an interesting geographic map of the airbnb in Vienna so that we can click at the airbnb we want to check out!
 
 We first load the data and parse the orice into an integer:
 ```{r load_data, echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE}

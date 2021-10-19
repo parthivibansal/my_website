@@ -49,6 +49,8 @@ library(kableExtra)
 
 Excess rentals in TfL bike sharing
 
+INTRODUCTION: In this analysis, we evaluate the number of bikes that were rented out in London during 2016-2019. 
+
 We can get the latest data by running the following codes:
 
 ```{r, get_tfl_data, cache=TRUE}
@@ -180,5 +182,5 @@ ggplot(bike_week_comp,aes(week))+
   scale_y_continuous(labels=scales::percent)
 
 ```
-
+ANALYSIS: 
 

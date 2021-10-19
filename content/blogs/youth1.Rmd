@@ -45,7 +45,7 @@ library(openintro)
 
 # Youth Risk Behavior Surveillance
 
-Every two years, the Centers for Disease Control and Prevention conduct the [Youth Risk Behavior Surveillance System (YRBSS)](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm) survey, where it takes data from high schoolers (9th through 12th grade), to analyze health patterns. We worked with a selected group of variables from a random sample of observations during one of the years the YRBSS was conducted.
+INTORDUCTION: Every two years, the Centers for Disease Control and Prevention conduct the [Youth Risk Behavior Surveillance System (YRBSS)](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm) survey, where it takes data from high schoolers (9th through 12th grade), to analyze health patterns. We worked with a selected group of variables from a random sample of observations during one of the years the YRBSS was conducted.We aim to analyse the factors that influence youth behaviour the most. 
 
 ## Load the data
 
@@ -134,6 +134,7 @@ yrbss_physical_3plus %>%
   labs(title="Distribution of Weight by Number of Active days in a week")
 
 ```
-Asthe bloxplot show, median weight of people who are active for at least 3 days a week is greater than the rest, which is an unexpected result. 
+
+As the bloxplot show, median weight of people who are active for at least 3 days a week is greater than the rest, which is an unexpected result. 
 
 
