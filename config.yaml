@@ -85,7 +85,7 @@ params:
       - image: stocks.jpg
         #subtitle: Nisl Sed Aliquam
         title: Analysis of financial returns of DJIA
-        url: blogs/stock1
+        url: blogs/stock
       - image: yieldcurve.jpg
         #subtitle: 
         title: Yield Curve Visualisations
