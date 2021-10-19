@@ -90,7 +90,7 @@ params:
         #subtitle: 
         title: Yield Curve Visualisssations!
         url: blogs/yieldcurve
-      - image: inflation .jpgblog
+      - image: inflation .jpg
         #subtitle: Assignment
         title: Inflation and CPI Analysis
         url: blogs/inflation
