@@ -63,7 +63,7 @@ params:
       - name: 
         url: blogs/ipsum
       - name: My stock reports 
-        url: blogs/
+        url: blogs/cipla1
     menu: Menu
     subtitle: PORTFOLIO
     title: HOME
@@ -90,9 +90,9 @@ params:
         #subtitle: 
         title: Yield Curve Visualisations
         url: blogs/yieldcurve
-      - image: map .jpg
+      - image: map.jpg
         #subtitle: Assignment
-        title: Interactive Mapping for AirBnBs in Vienna
+        title: AirBnB in Vienna - Mapping
         url: blogs/map
   two:
     buttonText: Get Started
