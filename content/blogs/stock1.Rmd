@@ -7,7 +7,7 @@ description:
 draft: false
 image: inflation.jpeg
 keywords: ""
-slug: stock
+slug: stock1
 title: Analysing financial returns of DJIA
 ---
 
