@@ -63,7 +63,7 @@ params:
       - name: 
         url: blogs/ipsum
       - name: My stock reports 
-        url: blogs/cipla1
+        url: blogs/
     menu: Menu
     subtitle: PORTFOLIO
     title: HOME
