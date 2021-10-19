@@ -90,10 +90,10 @@ params:
         #subtitle: 
         title: Yield Curve Visualisations
         url: blogs/yieldcurve
-      - image: inflation .jpg
+      - image: map .jpg
         #subtitle: Assignment
-        title: Inflation and CPI Analysis
-        url: blogs/inflation
+        title: Interactive Mapping for AirBnBs in Vienna
+        url: blogs/map
   two:
     buttonText: Get Started
     enable: yes
