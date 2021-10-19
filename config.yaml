@@ -65,11 +65,15 @@ params:
       - name: My stock reports 
         url: blogs/cipla1
     menu: Menu
-    subtitle: By HTML5 Up
-    title: Forty
+    subtitle: PORTFOLIO
+    title: HOME
   tiles:
     enable: yes
-    showcase:
+    showcase:      
+      - image: photo.jpeg
+        #subtitle: 
+        title: About myself
+        url: blogs/me1
       - image: youth.jpg
         #subtitle: Ipsum Dolor Sit Amet
         title: Lets see what is influencing the youth?
@@ -78,10 +82,6 @@ params:
         #subtitle: Feugiat Amet Tempus
         title: Excess rentals in TfL bike sharing!
         url: blogs/bike
-      #image: pic03.jpg
-        #subtitle: Lorem Etiam Nullam
-        #title: Magna
-        #url: blogs/magna
       - image: stocks.jpg
         #subtitle: Nisl Sed Aliquam
         title: Analysis of financial returns of DJIA
