@@ -3,7 +3,7 @@ title: "Yield Curve Visualisations!"
 date: '2017-10-31T22:26:09-05:00'
 description: null
 draft: no
-image: yieldcurve.jpeg
+image: yieldcurve.jpg
 keywords: ''
 slug: yieldcurve
 categories:
