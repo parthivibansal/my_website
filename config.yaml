@@ -33,7 +33,7 @@ params:
     text: Please visit [this page](/)
   favicon: favicon.ico
   footer:
-    copyright: Company Name
+    copyright: London Business School
     enable: yes
     quicklinks:
       - alt: HTML5 UP
@@ -51,7 +51,7 @@ params:
   navigation:
     button1:
       - name: Get Started
-        url: blogs
+        url: '#'
     button2:
       - name: Log In
         url: '#'
@@ -59,9 +59,7 @@ params:
       - name: My Portfolio
         url: '#'
       - name: About myself
-        url: blogs/me
-      - name: 
-        url: blogs/ipsum
+        url: blogs/me100
       - name: My stock reports 
         url: blogs/cipla1
     menu: Menu
@@ -71,27 +69,27 @@ params:
     enable: yes
     showcase:      
       - image: photo.jpeg
-        #subtitle: 
+        subtitle: Sneak peak into my personality!
         title: About myself
-        url: blogs/me
-      - image: youth.jpg
-        #subtitle: Ipsum Dolor Sit Amet
-        title: Lets see what is influencing the youth?
-        url: blogs/youth
+        url: blogs/me100
       - image: bike.jpg
-        #subtitle: Feugiat Amet Tempus
+        subtitle: Inferential Analysis of the excess bike rentals from 2016-2019
         title: Excess rentals in TFL bike sharing
         url: blogs/bike1
       - image: stocks.jpg
-        #subtitle: Nisl Sed Aliquam
+        subtitle: Risk vs Return plot for effective portfolio management
         title: Analysis of financial returns of DJIA
         url: blogs/stock
       - image: yieldcurve.jpg
-        #subtitle: 
+        subtitle: Plotting visualisations for inverted yield curve 
         title: Yield Curve Visualisations
         url: blogs/yieldcurve
+      - image: youth.jpg
+        subtitle: Exploratory Data Analysis for variables affecting youth
+        title: Lets see what is influencing the youth?
+        url: blogs/youth
       - image: map.jpg
-        #subtitle: Assignment
+        subtitle: An interactive map that redirects you to the different airbns
         title: AirBnB in Vienna - Mapping
         url: blogs/map
   two:
@@ -101,4 +99,4 @@ params:
       \n   boxplots, line plots and other graphs. They majorly focus on Exploratory data analysis
       and Inferential Statistics"
     title: About my work
-    url: blogs
+    url: '#'

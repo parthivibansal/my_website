@@ -7,8 +7,30 @@ description:
 draft: false
 image: me.jpeg
 keywords: ""
-slug: cipla
-title: MY WORK: STOCK REPORT
+slug: me100
+title: About myself
 ---
 
-[My stock report on CIPLA](https://docs.google.com/document/d/1-VWRGCe6Zkrq7wPgSyQ9fNDwb4bXncie/edit?usp=sharing&ouid=101003170896201780926&rtpof=true&sd=true)
+[*SAY HELLO!*]{.ul}
+
+Hi! I'm Parthivi Bansal from New Delhi, India! Impact driven at heart and curious by nature, I am pursuing my Masters in Financial Analysis from London Business School. I pursued my Bachelors in Finance from India!
+
+[*WHAT ARE MY QUALIFICATIONS?*]{.ul}
+
+**Degrees: Bachelors in Management (9.6/10) , Masters in Finance (8/10)**
+
+Work Experience:
+
+-Equity researcher at Maversify
+
+-Investment Management at Finway Capital
+
+-Investment Researcher at FinLadder
+
+[*MY HOBBIES*]{.ul}
+
+I am really passionate about dancing and am a professionally trained dancer in Jazz. I am also a table tennis player. Travelling the world and exploring different places is something that really intrigues me!
+
+[*5 WORDS THAT DEFINE ME*]{.ul}
+
+Leader, Extrovert, Empathetic, Analytical, Hardworking
