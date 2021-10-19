@@ -205,6 +205,6 @@ mean_vs_sd_plot
 ```
 
 
-ANALYSIS: This plot allows us to understand better which stocks with a given level of risk, give a higher return. For example, IBM and V(VISA) have a similar risk level but V(VISA) offers a much higher return. CSCO for example has an approximate standard deviation of 0.097 and the same return of SPY which has a much lower risk. Therefore, this graph helps us making the best risk return combinations in terms of portfolio management. 
+#ANALYSIS: This plot allows us to understand better which stocks with a given level of risk, give a higher return. For example, IBM and V(VISA) have a similar risk level but V(VISA) offers a much higher return. CSCO for example has an approximate standard deviation of 0.097 and the same return of SPY which has a much lower risk. Therefore, this graph helps us making the best risk return combinations in terms of portfolio management. 
 
 

@@ -37,9 +37,7 @@ library(ggrepel)
 library(rsample)
 ```
 
-# Introduction 
-
-This exercise makes an interesting geographic map of the airbnb in Vienna so that we can click at the airbnb we want to check out!
+# Introduction: This exercise makes an interesting geographic map of the airbnb in Vienna so that we can click at the airbnb we want to check out!
 
 We first load the data and parse the orice into an integer:
 ```{r load_data, echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE}
@@ -89,5 +87,5 @@ leaflet(data = filter(vienna_listings, minimum_nights <= 4)) %>% #filtering for 
                    label = ~property_type)
 ```
 
-Using this map, we can be redirected to any airbnb we want to check out along with an overview of their location. We know move on to exploratory analysis.
+#Using this map, we can be redirected to any airbnb we want to check out along with an overview of their location. We know move on to exploratory analysis.
     
