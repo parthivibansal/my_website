@@ -58,7 +58,7 @@ params:
     links:
       - name: My Portfolio
         url: '#'
-      - name: About Me!
+      - name: About myself
         url: blogs/me
       - name: 
         url: blogs/ipsum
@@ -73,22 +73,22 @@ params:
       - image: photo.jpeg
         #subtitle: 
         title: About myself
-        url: blogs/me1
+        url: blogs/me
       - image: youth.jpg
         #subtitle: Ipsum Dolor Sit Amet
         title: Lets see what is influencing the youth?
         url: blogs/youth
       - image: bike.jpg
         #subtitle: Feugiat Amet Tempus
-        title: Excess rentals in TfL bike sharing!
-        url: blogs/bike
+        title: Excess rentals in TFL bike sharing
+        url: blogs/bike1
       - image: stocks.jpg
         #subtitle: Nisl Sed Aliquam
         title: Analysis of financial returns of DJIA
         url: blogs/stock
       - image: yieldcurve.jpg
         #subtitle: 
-        title: Yield Curve Visualisssations!
+        title: Yield Curve Visualisations
         url: blogs/yieldcurve
       - image: inflation .jpg
         #subtitle: Assignment
