@@ -5,10 +5,10 @@ categories:
 date: "2017-10-31T22:26:09-05:00"
 description:
 draft: false
-image: me.jpeg
+#image: me.jpeg
 keywords: ""
 slug: cipla
-title: MY WORK: STOCK REPORT
+title: My work: STOCK REPORT
 ---
 
 [My stock report on CIPLA](https://docs.google.com/document/d/1-VWRGCe6Zkrq7wPgSyQ9fNDwb4bXncie/edit?usp=sharing&ouid=101003170896201780926&rtpof=true&sd=true)

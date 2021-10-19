@@ -63,7 +63,7 @@ params:
       - name: 
         url: blogs/ipsum
       - name: My stock reports 
-        url: blogs/cipla
+        url: blogs/cipla1
     menu: Menu
     subtitle: By HTML5 Up
     title: Forty
