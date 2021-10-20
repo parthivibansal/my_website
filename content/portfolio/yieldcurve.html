@@ -1,0 +1,103 @@
+---
+title: "Yield Curve Visualisations!"
+date: '2017-10-31T22:26:09-05:00'
+description: null
+draft: no
+image: yieldcurve.jpg
+keywords: ''
+slug: yieldcurve
+categories:
+- ''
+- ''
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>#Yield Curve inversion</p>
+<p>#INTRODUCTION : Every so often, we hear warnings from commentators on the “inverted yield curve” and its predictive power with respect to recessions.</p>
+<p>#In our case I look at US data and use the <a href="https://fred.stlouisfed.org/">FRED database</a> to download historical yield curve rates, and plot the yield curves since 1999 to see when the yield curves flatten.</p>
+<p>#First, we will load the yield curve data file that contains data on the yield curve since 1960-01-01</p>
+<pre class="r"><code>yield_curve &lt;- read_csv(here::here(&quot;data&quot;, &quot;yield_curve.csv&quot;))
+glimpse(yield_curve)</code></pre>
+<pre><code>## Rows: 6,884
+## Columns: 5
+## $ date      &lt;date&gt; 1960-01-01, 1960-02-01, 1960-03-01, 1960-04-01, 1960-05-01,…
+## $ series_id &lt;chr&gt; &quot;TB3MS&quot;, &quot;TB3MS&quot;, &quot;TB3MS&quot;, &quot;TB3MS&quot;, &quot;TB3MS&quot;, &quot;TB3MS&quot;, &quot;TB3MS…
+## $ value     &lt;dbl&gt; 4.35, 3.96, 3.31, 3.23, 3.29, 2.46, 2.30, 2.30, 2.48, 2.30, …
+## $ maturity  &lt;chr&gt; &quot;3m&quot;, &quot;3m&quot;, &quot;3m&quot;, &quot;3m&quot;, &quot;3m&quot;, &quot;3m&quot;, &quot;3m&quot;, &quot;3m&quot;, &quot;3m&quot;, &quot;3m&quot;, …
+## $ duration  &lt;chr&gt; &quot;3-Month Treasury Bill&quot;, &quot;3-Month Treasury Bill&quot;, &quot;3-Month T…</code></pre>
+<p>Our dataframe <code>yield_curve</code> has five columns (variables):</p>
+<ul>
+<li><code>date</code>: already a date object</li>
+<li><code>series_id</code>: the FRED database ticker symbol</li>
+<li><code>value</code>: the actual yield on that date</li>
+<li><code>maturity</code>: a short hand for the maturity of the bond</li>
+<li><code>duration</code>: the duration, written out in all its glory!</li>
+</ul>
+<div id="plotting-the-yield-curve" class="section level2">
+<h2>Plotting the yield curve</h2>
+<p>We are going to create three plots here.</p>
+<div id="yields-on-us-rates-by-duration-since-1960" class="section level3">
+<h3>Yields on US rates by duration since 1960</h3>
+<pre class="r"><code># unique(yield_curve$duration)
+yield_curve &lt;- yield_curve %&gt;%
+  #factor the duration variable in the correct order
+  mutate(duration=factor(duration,levels = c(&quot;3-Month Treasury Bill&quot;,&quot;6-Month Treasury Bill&quot;,&quot;1-Year Treasury Rate&quot;,&quot;2-Year Treasury Rate&quot;,
+                                          &quot;3-Year Treasury Rate&quot;,&quot;5-Year Treasury Rate&quot;,&quot;7-Year Treasury Rate&quot;,&quot;10-Year Treasury Rate&quot;,
+                                          &quot;20-Year Treasury Rate&quot;,&quot;30-Year Treasury Rate&quot;))) 
+
+ggplot(yield_curve,aes(x=date,y=value,color=duration))+
+  geom_line()+
+  #ncol sets the number of columns in the plot
+  facet_wrap(~duration,ncol=2)+
+  theme_bw()+
+  theme(legend.position = &quot;none&quot;,
+        plot.title =element_text(size=16, face=&#39;bold&#39;,hjust = 0,margin = margin(10,0,10,0)),
+        plot.subtitle =element_text(size=16, hjust = 0), 
+        axis.text.x = element_text(size=10),
+        axis.text.y = element_text(size=12),
+        axis.ticks.x = element_line(),
+        axis.ticks.y=element_line(),
+        axis.title.x = element_text(size=16,face=&#39;bold&#39;),
+        axis.title.y = element_text(size=16,face=&#39;bold&#39;),
+        ) +
+  labs(title = &quot;Yields on U.S. Treasury rates since 1960&quot;, 
+       caption= &quot;Source: St. Louis Federal Reserve Economic Database (FRED)&quot;,
+       x=&quot;&quot;,y=&quot;%&quot;) </code></pre>
+<p><img src="/portfolio/yieldcurve_files/figure-html/yield_curve_1:%20Yields%20on%20US%20rates%20by%20duration%20since%201960-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="monthly-yields-on-us-rates-by-duration-since-1999-on-a-year-by-year-basis" class="section level3">
+<h3>Monthly yields on US rates by duration since 1999 on a year-by-year basis</h3>
+<pre class="r"><code>yield_curve &lt;- yield_curve %&gt;%
+  mutate(year=year(date),
+         month=month(date),
+         # for maturity, we also factor this variable in the correct order
+         maturity=factor(maturity,levels = c(&quot;3m&quot;,&quot;6m&quot;,&quot;1y&quot;,&quot;2y&quot;,
+                                          &quot;3y&quot;,&quot;5y&quot;,&quot;7y&quot;,&quot;10y&quot;,
+                                          &quot;20y&quot;,&quot;30y&quot;)))
+  
+
+yield_curve %&gt;%
+  filter(year&gt;=1999) %&gt;%
+  ggplot()+
+  geom_line(aes(x=maturity,y=value,group=month,color=factor(year)))+
+  facet_wrap(~year,ncol=4)+
+  theme_bw()+
+  theme(legend.position = &quot;none&quot;,
+        plot.title =element_text(size=16, face=&#39;bold&#39;,hjust = 0,margin = margin(10,0,10,0)),
+        plot.subtitle =element_text(size=16, hjust = 0), 
+        axis.text.x = element_text(size=10),
+        axis.text.y = element_text(size=12),
+        axis.ticks.x = element_line(),
+        axis.ticks.y=element_line(),
+        axis.title.x = element_text(size=16,face=&#39;bold&#39;),
+        axis.title.y = element_text(size=16,face=&#39;bold&#39;),
+        ) +
+  labs(title = &quot;US Yield Curve: monthly yields by duration on a year-by-year basis&quot;, 
+       caption= &quot;Source: St. Louis Federal Reserve Economic Database (FRED)&quot;,
+       x=&quot;Maturity&quot;,y=&quot;Yield(%)&quot;) </code></pre>
+<p><img src="/portfolio/yieldcurve_files/figure-html/yield_curve_2:%20Monthly%20yields%20on%20US%20rates%20by%20duration%20since%201999%20on%20a%20year-by-year%20basis-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>#ANALYSIS: Yield on securities have been decreasing and an inverted yield curve signals a recession.</p>
+</div>
+</div>

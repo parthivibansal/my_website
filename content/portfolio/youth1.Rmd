@@ -1,0 +1,140 @@
+---
+categories:
+- ""
+- ""
+date: "2017-10-31T22:26:09-05:00"
+description:
+draft: false
+image: youth.jpg
+keywords: ""
+slug: youth
+title: Lets see what is influencing the youth?
+---
+
+```{r, setup, echo=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+```
+
+
+```{r load-libraries, echo=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(GGally)
+library(readxl)
+library(here)
+library(skimr)
+library(janitor)
+library(broom)
+library(tidyquant)
+library(infer)
+library(openintro)
+```
+
+# Youth Risk Behavior Surveillance
+
+#INTORDUCTION: Every two years, the Centers for Disease Control and Prevention conduct the [Youth Risk Behavior Surveillance System (YRBSS)](https://www.cdc.gov/healthyyouth/data/yrbs/index.htm) survey, where it takes data from high schoolers (9th through 12th grade), to analyze health patterns. We worked with a selected group of variables from a random sample of observations during one of the years the YRBSS was conducted.We aim to analyse the factors that influence youth behaviour the most. 
+
+## Load the data
+
+This data is part of the `openintro` textbook and we can load and inspect it. There are observations on 13 different variables, some categorical and some numerical. The meaning of each variable can be found by bringing up the help file:?yrbss
+
+```{r, load the yrbss data and glimpse}
+data(yrbss)
+glimpse(yrbss)
+```
+
+We check with `skimr::skim()` to get a feel for missing values, summary statistics of numerical variables, and a very rough histogram.
+
+```{r, skim the data}
+skimr::skim(yrbss)
+```
+
+## Exploratory Data Analysis
+
+We first start with analyzing the `weight` of participants in kilograms. The visualization and summary statistics below describe the distribution of weights.
+
+```{r, eda_on_weight}
+summary(yrbss)
+sd(yrbss$weight,na.rm = TRUE)
+ggplot(yrbss, aes(x=weight))+
+  geom_histogram()
+```
+We have 1004 missing values for weight. The median smaller than mean and the standard deviation is 16.89821. According to the histogram, the distribution of weight is right skewed.
+
+Then, we plot the data to visualize trends and consider the possible relationship between a high schooler’s weight and their physical activity.
+
+```{r, plot the relationship btw weight and physical activity}
+yrbss %>%
+  filter(!is.na(physically_active_7d)) %>%
+  ggplot(aes(x=factor(physically_active_7d)))+
+  geom_boxplot(aes(y=weight))+
+  labs(title="Distribution of Weight by Number of Active days in a week")
+
+```
+Additionally, we create a new variable in the dataframe `yrbss`, called `physical_3plus` , which will be `yes` if they are physically active for at least 3 days a week, and `no` otherwise. We also calculate the number and % of those who are and are not active for more than 3 days using the `count()` function.
+
+  
+```{r, mutate_and_count}
+yrbss_physical_3plus <- yrbss %>%
+  filter(!is.na(physically_active_7d)) %>%
+  mutate(physical_3plus = ifelse(physically_active_7d>=3, "yes", "no"),
+         physical_3plus = factor(physical_3plus,levels=c("yes","no"))) 
+
+yrbss_physical_3plus
+
+prop_physical <- yrbss_physical_3plus %>%
+  count(physical_3plus) %>%
+  mutate(prop = n / sum(n) * 100)
+
+prop_physical
+
+yrbss_physical_3plus %>%
+  group_by(physical_3plus) %>%
+  summarise(count = n()) %>%
+  mutate(prop = count / sum(count) *100)
+        
+```
+A 95% confidence interval for the population proportion of high schools that are *NOT* active 3 or more days per week is illustrated below.
+
+```{r, CI for physical_3plus}
+
+prop.test(4404,8906+4404)
+
+prop_physical %>%
+  # pivot_wider(names_from = physical_3plus, values_from = n) 
+  mutate(total=sum(n)) %>%
+  filter(physical_3plus=="no") %>%
+  mutate(
+    prop=prop/100,
+    se=sqrt(prop*(1-prop)/total),
+    lower_bound = prop - 1.96*se,
+    upper_bound = prop + 1.96*se)
+
+
+```
+
+Then we make a boxplot of `physical_3plus` vs. `weight`. 
+```{r, boxplot}
+yrbss_physical_3plus %>%
+  ggplot(aes(x=physical_3plus))+
+  geom_boxplot(aes(y=weight))+
+  labs(title="Distribution of Weight by Number of Active days in a week")
+
+```
+
+As the bloxplot show, median weight of people who are active for at least 3 days a week is greater than the rest, which is an unexpected result. 
+
+

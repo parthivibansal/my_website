@@ -1,0 +1,91 @@
+---
+title: "AirBnB in Vienna - Mapping"
+date: '2017-10-31T22:26:09-05:00'
+description: null
+draft: no
+image: map.jpg
+keywords: ''
+slug: map
+categories:
+- ''
+- ''
+---
+
+
+```{r setup, include=FALSE}
+# leave this chunk alone
+options(knitr.table.format = "html") 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
+  comment = NA, dpi = 300)
+```
+
+
+```{r load-libraries, echo=FALSE}
+
+library(tidyverse) # the usual stuff: dplyr, readr, and other goodies
+library(lubridate) # to handle dates
+library(janitor) # clean_names()
+library(kableExtra) # for formatting tables
+library(skimr) # for skim
+library(mosaic)
+library(leaflet) # for interactive HTML maps
+library(tidytext)
+library(viridis)
+library(vroom)
+library(geosphere)
+library(ggrepel)
+library(rsample)
+```
+
+# Introduction: This exercise makes an interesting geographic map of the airbnb in Vienna so that we can click at the airbnb we want to check out!
+
+We first load the data and parse the orice into an integer:
+```{r load_data, echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE}
+# use cache=TRUE so you dont donwload the data everytime you knit
+vienna_listings <- vroom("http://data.insideairbnb.com/austria/vienna/vienna/2021-09-12/data/listings.csv.gz") %>%
+  clean_names()
+```
+
+```{r parse price}
+# Price is a character, parse to integer
+vienna_listings <- vienna_listings %>% 
+  mutate(price = parse_number(price))
+```
+
+Following is an explanation of some of the variables in our data set:
+
+- `price` = cost per night 
+- `property_type`: type of accommodation (House, Apartment, etc.)
+- `room_type`:
+
+  - Entire home/apt (guests have entire place to themselves)
+  - Private room (Guests have private room to sleep, all other rooms shared)
+  - Shared room (Guests sleep in room shared with others)
+
+- `number_of_reviews`: Total number of reviews for the listing
+- `review_scores_rating`: Average review score (0 - 100)
+- `longitude` , `latitude`: geographical coordinates to help us locate the listing
+- `neighbourhood*`: three variables on a few major neighbourhoods in each city 
+
+
+# Mapping 
+
+Visualisations of feature distributions and their relations are key to understanding a data set, and they can open up new lines of exploration. For this visualisation we use the `leaflet` package, which includes a variety of tools for interactive maps.
+
+The following code, having downloaded a dataframe `listings` with all AirbnB listings in Milan, will plot on the map all AirBnBs where `minimum_nights` is less than equal to four (4). 
+
+```{r, creating a visuaisation, out.width = '80%'}
+
+leaflet(data = filter(vienna_listings, minimum_nights <= 4)) %>% #filtering for minimum nights criteria 
+  addProviderTiles("OpenStreetMap.Mapnik") %>% 
+  addCircleMarkers(lng = ~longitude,  
+                   lat = ~latitude, 
+                   radius = 1, 
+                   fillColor = "blue", 
+                   fillOpacity = 0.4, 
+                   popup = ~listing_url,
+                   label = ~property_type)
+```
+
+#Using this map, we can be redirected to any airbnb we want to check out along with an overview of their location. We know move on to exploratory analysis.
+    

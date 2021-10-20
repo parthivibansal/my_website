@@ -1,0 +1,139 @@
+---
+title: "Yield Curve Visualisations!"
+date: '2017-10-31T22:26:09-05:00'
+description: null
+draft: no
+image: yieldcurve.jpg
+keywords: ''
+slug: yieldcurve
+categories:
+- ''
+- ''
+---
+
+
+
+```{r, setup, echo=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE, 
+  warning = FALSE, 
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+options(digits = 3)
+
+# default figure size
+knitr::opts_chunk$set(
+  fig.width=6.75, 
+  fig.height=6.75,
+  fig.align = "center"
+)
+```
+
+
+```{r load-libraries, echo=FALSE}
+library(tidyverse)  # Load ggplot2, dplyr, and all the other tidyverse packages
+library(mosaic)
+library(ggthemes)
+library(GGally)
+library(readxl)
+library(here)
+library(skimr)
+library(janitor)
+library(broom)
+library(tidyquant)
+library(infer)
+library(openintro)
+```
+
+#Yield Curve inversion
+
+#INTRODUCTION : Every so often, we hear warnings from commentators on the "inverted yield curve" and its predictive power with respect to recessions. 
+
+#In our case I  look at US data and use the [FRED database](https://fred.stlouisfed.org/) to download historical yield curve rates, and plot the yield curves since 1999 to see when the yield curves flatten. 
+
+#First, we will load the yield curve data file that contains data on the yield curve since 1960-01-01
+
+```{r download_historical_yield_curve, warning=FALSE}
+yield_curve <- read_csv(here::here("data", "yield_curve.csv"))
+glimpse(yield_curve)
+```
+
+Our dataframe `yield_curve` has five columns (variables):
+
+- `date`: already a date object
+- `series_id`: the FRED database ticker symbol
+- `value`: the actual yield on that date
+- `maturity`: a short hand for the maturity of the bond
+- `duration`: the duration, written out in all its glory!
+
+## Plotting the yield curve
+
+We are going to create three plots here.
+
+### Yields on US rates by duration since 1960
+
+
+```{r yield_curve_1: Yields on US rates by duration since 1960, out.width="100%",fig.width=15, fig.height=12}
+# unique(yield_curve$duration)
+yield_curve <- yield_curve %>%
+  #factor the duration variable in the correct order
+  mutate(duration=factor(duration,levels = c("3-Month Treasury Bill","6-Month Treasury Bill","1-Year Treasury Rate","2-Year Treasury Rate",
+                                          "3-Year Treasury Rate","5-Year Treasury Rate","7-Year Treasury Rate","10-Year Treasury Rate",
+                                          "20-Year Treasury Rate","30-Year Treasury Rate"))) 
+
+ggplot(yield_curve,aes(x=date,y=value,color=duration))+
+  geom_line()+
+  #ncol sets the number of columns in the plot
+  facet_wrap(~duration,ncol=2)+
+  theme_bw()+
+  theme(legend.position = "none",
+        plot.title =element_text(size=16, face='bold',hjust = 0,margin = margin(10,0,10,0)),
+        plot.subtitle =element_text(size=16, hjust = 0), 
+        axis.text.x = element_text(size=10),
+        axis.text.y = element_text(size=12),
+        axis.ticks.x = element_line(),
+        axis.ticks.y=element_line(),
+        axis.title.x = element_text(size=16,face='bold'),
+        axis.title.y = element_text(size=16,face='bold'),
+        ) +
+  labs(title = "Yields on U.S. Treasury rates since 1960", 
+       caption= "Source: St. Louis Federal Reserve Economic Database (FRED)",
+       x="",y="%") 
+```
+
+### Monthly yields on US rates by duration since 1999 on a year-by-year basis
+
+
+```{r yield_curve_2: Monthly yields on US rates by duration since 1999 on a year-by-year basis,out.width="100%",fig.width=15, fig.height=12}
+yield_curve <- yield_curve %>%
+  mutate(year=year(date),
+         month=month(date),
+         # for maturity, we also factor this variable in the correct order
+         maturity=factor(maturity,levels = c("3m","6m","1y","2y",
+                                          "3y","5y","7y","10y",
+                                          "20y","30y")))
+  
+
+yield_curve %>%
+  filter(year>=1999) %>%
+  ggplot()+
+  geom_line(aes(x=maturity,y=value,group=month,color=factor(year)))+
+  facet_wrap(~year,ncol=4)+
+  theme_bw()+
+  theme(legend.position = "none",
+        plot.title =element_text(size=16, face='bold',hjust = 0,margin = margin(10,0,10,0)),
+        plot.subtitle =element_text(size=16, hjust = 0), 
+        axis.text.x = element_text(size=10),
+        axis.text.y = element_text(size=12),
+        axis.ticks.x = element_line(),
+        axis.ticks.y=element_line(),
+        axis.title.x = element_text(size=16,face='bold'),
+        axis.title.y = element_text(size=16,face='bold'),
+        ) +
+  labs(title = "US Yield Curve: monthly yields by duration on a year-by-year basis", 
+       caption= "Source: St. Louis Federal Reserve Economic Database (FRED)",
+       x="Maturity",y="Yield(%)") 
+
+```
+
+#ANALYSIS: Yield on securities have been decreasing and an inverted yield curve signals a recession. 

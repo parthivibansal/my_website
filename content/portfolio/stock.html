@@ -1,0 +1,183 @@
+---
+categories:
+- ""
+- ""
+date: "2017-10-31T22:26:09-05:00"
+description:
+draft: false
+image: stocks.jpg
+keywords: ""
+slug: stock
+title: Analysing financial returns of DJIA
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="returns-of-financial-stocks" class="section level1">
+<h1>Returns of financial stocks</h1>
+<p>#INTRODUCTION: We are analysing the returns on 30 DJIA stocks and plotting them on a n efficient frontier(risk vs return graph) so as to make the best portfolio decisions.
+#We first load this code to get the data</p>
+<pre class="r"><code>djia_url &lt;- &quot;https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average&quot;
+
+
+#get tables that exist on URL
+tables &lt;- djia_url %&gt;% 
+  read_html() %&gt;% 
+  html_nodes(css=&quot;table&quot;)
+
+
+# parse HTML tables into a dataframe called djia. 
+# Use purr::map() to create a list of all tables in URL
+djia &lt;- map(tables, . %&gt;% 
+               html_table(fill=TRUE)%&gt;% 
+               clean_names())
+
+
+# constituents
+table1 &lt;- djia[[2]] %&gt;% # the second table on the page contains the ticker symbols
+  mutate(date_added = ymd(date_added),
+         
+         # if a stock is listed on NYSE, its symbol is, e.g., NYSE: MMM
+         # We will get prices from yahoo finance which requires just the ticker
+         
+         # if symbol contains &quot;NYSE*&quot;, the * being a wildcard
+         # then we jsut drop the first 6 characters in that string
+         ticker = ifelse(str_detect(symbol, &quot;NYSE*&quot;),
+                          str_sub(symbol,7,11),
+                          symbol)
+         )
+
+# we need a vector of strings with just the 30 tickers + SPY
+tickers &lt;- table1 %&gt;% 
+  select(ticker) %&gt;% 
+  pull() %&gt;% # pull() gets them as a sting of characters
+  c(&quot;SPY&quot;) # and lets us add SPY, the SP500 ETF</code></pre>
+<p>Now let us downlaod prices for all 30 DJIA consituents and the SPY ETF that tracks SP500 since January 1, 2020</p>
+<pre class="r"><code># Notice the cache=TRUE argument in the chunk options. Because getting data is time consuming, # cache=TRUE means that once it downloads data, the chunk will not run again next time you knit your Rmd
+
+myStocks &lt;- tickers %&gt;% 
+  tq_get(get  = &quot;stock.prices&quot;,
+         from = &quot;2000-01-01&quot;,
+         to   = Sys.Date()) %&gt;% # Sys.Date() returns today&#39;s price
+  group_by(symbol) 
+
+glimpse(myStocks) # examine the structure of the resulting data frame</code></pre>
+<pre><code>## Rows: 162,018
+## Columns: 8
+## Groups: symbol [31]
+## $ symbol   &lt;chr&gt; &quot;MMM&quot;, &quot;MMM&quot;, &quot;MMM&quot;, &quot;MMM&quot;, &quot;MMM&quot;, &quot;MMM&quot;, &quot;MMM&quot;, &quot;MMM&quot;, &quot;MMM&quot;…
+## $ date     &lt;date&gt; 2000-01-03, 2000-01-04, 2000-01-05, 2000-01-06, 2000-01-07, …
+## $ open     &lt;dbl&gt; 48.0, 46.4, 45.6, 47.2, 50.6, 50.2, 50.4, 51.0, 50.7, 50.4, 4…
+## $ high     &lt;dbl&gt; 48.2, 47.4, 48.1, 51.2, 51.9, 51.8, 51.2, 51.8, 50.9, 50.5, 4…
+## $ low      &lt;dbl&gt; 47.0, 45.3, 45.6, 47.2, 50.0, 50.0, 50.2, 50.4, 50.2, 49.5, 4…
+## $ close    &lt;dbl&gt; 47.2, 45.3, 46.6, 50.4, 51.4, 51.1, 50.2, 50.4, 50.4, 49.7, 4…
+## $ volume   &lt;dbl&gt; 2173400, 2713800, 3699400, 5975800, 4101200, 3863800, 2357600…
+## $ adjusted &lt;dbl&gt; 27.2, 26.1, 26.9, 29.0, 29.6, 29.4, 28.9, 29.0, 29.0, 28.6, 2…</code></pre>
+<p>Financial performance analysis depend on returns; If I buy a stock today for 100 and I sell it tomorrow for 101.75, my one-day return, assuming no transaction costs, is 1.75%. So given the adjusted closing prices, our first step is to calculate daily and monthly returns.</p>
+<pre class="r"><code>#calculate daily returns
+myStocks_returns_daily &lt;- myStocks %&gt;%
+  tq_transmute(select     = adjusted, 
+               mutate_fun = periodReturn, 
+               period     = &quot;daily&quot;, 
+               type       = &quot;log&quot;,
+               col_rename = &quot;daily_returns&quot;,
+               cols = c(nested.col))  
+
+#calculate monthly  returns
+myStocks_returns_monthly &lt;- myStocks %&gt;%
+  tq_transmute(select     = adjusted, 
+               mutate_fun = periodReturn, 
+               period     = &quot;monthly&quot;, 
+               type       = &quot;arithmetic&quot;,
+               col_rename = &quot;monthly_returns&quot;,
+               cols = c(nested.col)) 
+
+#calculate yearly returns
+myStocks_returns_annual &lt;- myStocks %&gt;%
+  group_by(symbol) %&gt;%
+  tq_transmute(select     = adjusted, 
+               mutate_fun = periodReturn, 
+               period     = &quot;yearly&quot;, 
+               type       = &quot;arithmetic&quot;,
+               col_rename = &quot;yearly_returns&quot;,
+               cols = c(nested.col))
+
+myStocks_returns_monthly</code></pre>
+<pre><code>## # A tibble: 7,741 × 3
+## # Groups:   symbol [31]
+##    symbol date       monthly_returns
+##    &lt;chr&gt;  &lt;date&gt;               &lt;dbl&gt;
+##  1 MMM    2000-01-31        -0.00795
+##  2 MMM    2000-02-29        -0.0520 
+##  3 MMM    2000-03-31         0.00425
+##  4 MMM    2000-04-28        -0.0219 
+##  5 MMM    2000-05-31        -0.00368
+##  6 MMM    2000-06-30        -0.0321 
+##  7 MMM    2000-07-31         0.0851 
+##  8 MMM    2000-08-31         0.0390 
+##  9 MMM    2000-09-29        -0.0203 
+## 10 MMM    2000-10-31         0.0604 
+## # … with 7,731 more rows</code></pre>
+<p>Create a table where you summarise monthly returns for each of the stocks and <code>SPY</code>; min, max, median, mean, SD.</p>
+<pre class="r"><code>monthly_stock_performance &lt;- myStocks_returns_monthly %&gt;%
+  select(symbol,monthly_returns) %&gt;%
+  group_by(symbol) %&gt;%
+  summarise(mean_monthly_return=mean(monthly_returns),
+            median_monthly_return=median(monthly_returns),
+            sd_monthly_return=sd(monthly_returns),
+            min_monthly_return=min(monthly_returns),
+            max_monthly_return=max(monthly_returns)) %&gt;%
+  arrange(-mean_monthly_return)
+
+monthly_stock_performance</code></pre>
+<pre><code>## # A tibble: 31 × 6
+##    symbol mean_monthly_return median_monthly_… sd_monthly_retu… min_monthly_ret…
+##    &lt;chr&gt;                &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+##  1 AAPL                0.0269           0.0352           0.115            -0.577
+##  2 CRM                 0.0262           0.0205           0.110            -0.360
+##  3 V                   0.0200           0.0256           0.0660           -0.196
+##  4 UNH                 0.0192           0.0232           0.0699           -0.306
+##  5 NKE                 0.0163           0.0169           0.0758           -0.375
+##  6 DOW                 0.0156           0.0325           0.109            -0.276
+##  7 CAT                 0.0144           0.0141           0.0898           -0.353
+##  8 BA                  0.0126           0.0165           0.0925           -0.458
+##  9 MSFT                0.0115           0.0177           0.0820           -0.344
+## 10 GS                  0.0111           0.0163           0.0926           -0.275
+## # … with 21 more rows, and 1 more variable: max_monthly_return &lt;dbl&gt;</code></pre>
+<p>Plot a density plot, using <code>geom_density()</code>, for each of the stocks</p>
+<pre class="r"><code>density_plot &lt;- myStocks_returns_monthly %&gt;%
+  ggplot(aes(monthly_returns))+
+  geom_density()+
+  facet_wrap(vars(symbol))+
+  theme_bw()+
+  labs(
+    title = &quot;Density plot for each stock from DJIA&quot;,
+    subtitle = &quot;Stock monthly returns seem to follow a normal distribution &quot;,
+    x = &quot;Monthly returns&quot;,
+    y = &quot;Density &quot;
+  )+
+  NULL
+
+density_plot</code></pre>
+<p><img src="/portfolio/stock_files/figure-html/density_monthly_returns-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p>The spread of the curves corresponds to the volatility of the monthly returns. The higher the spread, thee higher the volatility of the monthly returns implying a greater risk for an investment. For example, companies like JNJ or SPY seems to have a small spread relative to other stocks. These stocks can be described as the least risky. Stocks like AAPL and DOW have the largest spread and therefore are considered as the riskist.</p>
+<p>The peak of the curve correspond to the potential return on investment , the higher the peak (which corresponds to the mean of the distribution, assuming that is normal), the higher the returns on these stocks. Companies like PG and SPY seems to have the highest potential.</p>
+<p>Finally, make a plot that shows the expected monthly return (mean) of a stock on the Y axis and the risk (standard deviation) in the X-axis. Please use <code>ggrepel::geom_text_repel()</code> to label each stock</p>
+<pre class="r"><code>mean_vs_sd_plot &lt;- monthly_stock_performance %&gt;%
+  ggplot(aes(x=sd_monthly_return,y=mean_monthly_return,label=symbol))+
+  geom_point(colour=&quot;red&quot;)+
+  ggrepel::geom_text_repel()+ #to label each stock
+  theme_bw()+
+  labs(
+    title = &quot;Expected monthly return against risk&quot;,
+    subtitle = &quot;We can see that this graph corresponds to an efficient frontier&quot;,
+    x = &quot;Standard deviation&quot;,
+    y = &quot;Expected monthly return&quot;
+  )+
+  NULL
+
+mean_vs_sd_plot</code></pre>
+<p><img src="/portfolio/stock_files/figure-html/risk_return_plot-1.png" width="648" style="display: block; margin: auto;" /></p>
+<p>#ANALYSIS: This plot allows us to understand better which stocks with a given level of risk, give a higher return. For example, IBM and V(VISA) have a similar risk level but V(VISA) offers a much higher return. CSCO for example has an approximate standard deviation of 0.097 and the same return of SPY which has a much lower risk. Therefore, this graph helps us making the best risk return combinations in terms of portfolio management.</p>
+</div>
